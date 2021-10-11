@@ -4,6 +4,7 @@ import { Avatar } from 'react-native-paper'
 
 const styles = StyleSheet.create({
     container: {
+        marginTop: '9%'
     }
 })
 

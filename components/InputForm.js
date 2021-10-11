@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {View, Text, StyleSheet} from 'react-native'
 import { TextInput } from 'react-native-paper';
 
-function InputForm({placeholder,title}) {
+function InputForm({placeholder,title, nameSetter}) {
 
     const [text, setText] = useState('')
 
@@ -12,7 +12,7 @@ function InputForm({placeholder,title}) {
             fontSize: 15,
         },
         container: {
-            height: "20%",
+            height: "10%",
             marginTop: "10%",
         }
     })
@@ -22,10 +22,10 @@ function InputForm({placeholder,title}) {
            <Text style={{fontSize: 15}}>{title}</Text>
             <TextInput
             placeholder={placeholder}
-            value={text}
+            //value={text}
             mode='outlined'
             outlineColor='#0080ff'
-            onChangeText={text => setText(text)}
+            onChangeText={text => nameSetter(text)}
             style={styles.inputform} />
        </View>
     )
