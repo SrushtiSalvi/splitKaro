@@ -6,25 +6,30 @@ import AddButton from './AddButton';
 import { Divider } from 'react-native-paper';
 
 function ExistingFriend({ set }) {
-
+    
     const [text, setText] = useState('')
     const [name, setName] = useState('')
     const [share, setShare] = useState(0)
     const [friendList, setFriendList] = useState([])
 
+
     useEffect(() => {
         setter()
+        console.log("effect")
     },[]);
     // function clearAllData() {
     //     AsyncStorage.getAllKeys()
     //         .then(keys => AsyncStorage.multiRemove(keys))
     //         .then(() => alert('success'));
     // }
+    
+
+   
 
     const setter = async () => {
         const a = await AsyncStorage.getItem('list')
         setFriendList(JSON.parse(a))
-        console.log(friendList,"aa") 
+        // console.log(friendList,"aa") 
     }
 
     const nameSetter = (name) => {
@@ -58,7 +63,7 @@ function ExistingFriend({ set }) {
                 />
             </View>
             <AddButton title={'ADD EXPENSE'} set={set} saveFriend={saveFriend} />
-            <Text>{friendList.length}</Text>
+            {/* <Text>{friendList.length}</Text> */}
             <Text style={{fontSize: 25,marginTop: "2%"}}>Friends List</Text>
             <ScrollView style={{height: '35%'}}> 
             {friendList.length > 0 ? friendList.map((friend,index) => 
