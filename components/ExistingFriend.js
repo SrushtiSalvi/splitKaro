@@ -15,7 +15,7 @@ function ExistingFriend({ set }) {
 
     useEffect(() => {
         setter()
-        console.log("effect")
+        // console.log("effect")
     },[]);
     // function clearAllData() {
     //     AsyncStorage.getAllKeys()

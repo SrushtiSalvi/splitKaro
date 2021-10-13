@@ -25,7 +25,7 @@ function InputForm({placeholder,title, nameSetter}) {
             //value={text}
             mode='outlined'
             outlineColor='#0080ff'
-            onChangeText={text => nameSetter(text)}
+            onChangeText={(text) => nameSetter(text)}
             style={styles.inputform} />
        </View>
     )

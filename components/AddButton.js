@@ -1,8 +1,9 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Button } from 'react-native-paper'
+import NewGroup from './NewGroup'
 
-function AddButton({title, set, saveFriend}) {
+function AddButton({title, set, saveFriend, createGroup}) {
 
 const styles = StyleSheet.create({
     button: {
@@ -16,9 +17,12 @@ const styles = StyleSheet.create({
     }
 })
 
+
+
 const handleOnPress = () => {
     if(title === 'CREATE GROUP') {
         set('newGroup')
+        createGroup()
     }else if(title === "ADD EXPENSE"){
         saveFriend('abca')
     }

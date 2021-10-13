@@ -19,7 +19,7 @@ function AccoutButtons({navigation}) {
         <View style={styles.container}>
             <TouchableOpacity style={styles.buttons} onPress={() => navigation.navigate("ImportBalancesScreen")}>
                 <Avatar.Icon size={35} icon="cloud-upload-outline" color="blue" backgroundColor="white"/>
-                <Text style={{fontSize: 18}}>Import Balances</Text>
+                <Text style={{fontSize: 18, color: 'blue'}}>Import Balances</Text>
             </TouchableOpacity>
             <Divider style={{borderBottomWidth:1, borderColor: 'grey'}} />
             <View style={styles.buttons}>
@@ -34,7 +34,7 @@ function AccoutButtons({navigation}) {
             <Divider style={{borderBottomWidth:1, borderColor: 'grey'}} />
             <View style={styles.buttons}>
                 <Avatar.Icon size={35} icon="cloud-upload-outline" color="blue" backgroundColor="White"/>
-                <Text style={{fontSize: 18, color: 'blue'}}>Import Balances from other apps</Text>
+                <Text style={{fontSize: 18, color: 'black'}}>Import Balances from other apps</Text>
             </View>
         </View>
     )

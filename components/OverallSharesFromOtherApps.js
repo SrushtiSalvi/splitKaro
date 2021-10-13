@@ -1,53 +1,61 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable } from 'react-native'
-import { Avatar } from 'react-native-paper'
+import { Avatar, Divider } from 'react-native-paper'
 import * as Contacts from 'expo-contacts';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: '9%'
+        marginTop: '9%',
+        
     },
     modal: {
-    backgroundColor: "red",
-    alignItems: "center",
-    justifyContent: "center",
-    // height: "90%",
-    margin: "5%",
-    marginBottom: '0%',
+        backgroundColor: "white",
+        alignItems: "center",
+        justifyContent: "center",
+        // height: "90%",
+        margin: "4%",
+        marginBottom: '0%',
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderTopWidth: 1,
+        borderTopStartRadius: 15,
+        borderTopEndRadius: 15
     },
     hideModel: {
-        backgroundColor: 'green', 
-        marginRight: '5%', 
-        marginLeft: "5%",
-        height: '5%',
-        justifyContent: 'center'
+        backgroundColor: '#e6f2ff',
+        marginRight: '4%',
+        marginLeft: "4%",
+        height: '13%',
+        justifyContent: 'center',
+        borderLeftWidth: 1,
+        borderBottomWidth: 1,
+        borderRightWidth: 1,
+        borderTopWidth: 1,
+        borderBottomEndRadius: 15,
+        borderBottomStartRadius: 15
+
     },
     hideModalText: {
         alignSelf: 'center',
+        fontSize: 20,
+        fontWeight: 'bold',
+        width: "15%",
     },
     contactList: {
-        fontSize: 20,
-
+        padding: '2%', 
+        fontSize: 18,
     }
 })
 
 
 
 
-function OverallSharesFromOtherApps() {
+function OverallSharesFromOtherApps({friendSetter, groupMembers, setModalVisible, modalVisible}) {
 
     const [contacts, setContacts] = useState([])
-    const [modalVisible, setModalVisible] = useState(false);
-    const [groupMembers, setGroupMembers] = useState([])
 
-    const friendSetter = (contact) => {
-        const existingFriends = groupMembers;
-        existingFriends.push(contact) 
-        setGroupMembers(existingFriends)
-        console.log(groupMembers)
-        setModalVisible(false)
-    }
+
 
 
     const handleOnPress = async () => {
@@ -55,8 +63,8 @@ function OverallSharesFromOtherApps() {
         if (status === 'granted') {
             const { data } = await Contacts.getContactsAsync({
                 fields: [
-                   phone_number =  Contacts.PHONE_NUMBERS,
-                   personName = Contacts.name
+                    phone_number = Contacts.PHONE_NUMBERS,
+                    personName = Contacts.name
                 ],
                 pageSize: 10,
                 pageOffset: 0,
@@ -71,32 +79,36 @@ function OverallSharesFromOtherApps() {
         setModalVisible(true)
     }
 
+    
+
 
 
     return (
         <View style={styles.container}>
+            <ScrollView>
             <Modal
                 animationType="slide"
                 transparent={true}
                 visible={modalVisible}
                 onRequestClose={() => {
-                    //Alert.alert("Modal has been closed.");
                     setModalVisible(!modalVisible);
                 }}
             >
-                <View style={{alignSelf: 'center'}}>
+                <View style={{ alignSelf: 'center', width: "90%", justifyContent:'center' }}>
                     <View style={styles.modal}>
-                            {contacts.map((contact,index) =>
+                        {contacts.map((contact, index) =>
                             <TouchableOpacity onPress={() => friendSetter(contact.firstName)} >
-                                <Text key={index} style={styles.contactList}>{contact.firstName}</Text>
+                                <Text key={index} style={{fontSize: 20}}>{contact.firstName}</Text>
+                            <Divider style={{borderWidth:0.5}}/>
                             </TouchableOpacity>
-                            )}
+                        )}
                     </View>
                     <TouchableOpacity style={styles.hideModel} onPress={() => setModalVisible(!modalVisible)}>
-                                <Text style={styles.hideModalText}>Hide Modal</Text>
-                        </TouchableOpacity>
+                        <Text style={styles.hideModalText}>Back</Text>
+                    </TouchableOpacity>
                 </View>
-            </Modal> 
+            </Modal>
+            </ScrollView>
 
 
             <Text style={{ fontSize: 20 }}>Add Overall Shares</Text>
@@ -106,12 +118,13 @@ function OverallSharesFromOtherApps() {
             </TouchableOpacity>
             <Text style={{ marginTop: '-5%', fontSize: 10, marginLeft: "4%" }}>Add a friend</Text>
             <ScrollView>
-                <Text>Number of Members: {groupMembers.length}</Text>
-                {groupMembers.length > 0 ? groupMembers.map((contact, id) => 
+                <Text style={{fontSize: 17}}>Number of Members: {groupMembers.length}</Text>
+                {groupMembers.length > 0 ? groupMembers.map((contact, id) =>
                     <View key={id}>
-                        <Text>{contact}</Text>
+                        <Text style={styles.contactList}>{contact}</Text>
+                        <Divider style={{borderWidth: 0.5, borderColor: 'grey'}}/>
                     </View>
-                ): <Text>No Group members added Yet</Text>}
+                ) : <Text style={{ marginTop: '2%' }}>No Group members added Yet</Text>}
             </ScrollView>
         </View>
     )
