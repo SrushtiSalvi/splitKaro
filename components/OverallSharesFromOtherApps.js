@@ -63,7 +63,7 @@ function OverallSharesFromOtherApps({friendSetter, groupMembers, setModalVisible
         if (status === 'granted') {
             const { data } = await Contacts.getContactsAsync({
                 fields: [
-                    phone_number = Contacts.PHONE_NUMBERS,
+                    //phone_number = Contacts.PHONE_NUMBERS,
                     personName = Contacts.name
                 ],
                 pageSize: 10,
@@ -97,7 +97,7 @@ function OverallSharesFromOtherApps({friendSetter, groupMembers, setModalVisible
                 <View style={{ alignSelf: 'center', width: "90%", justifyContent:'center' }}>
                     <View style={styles.modal}>
                         {contacts.map((contact, index) =>
-                            <TouchableOpacity onPress={() => friendSetter(contact.firstName)} >
+                            <TouchableOpacity onPress={() => friendSetter(contact.firstName)} key={index} >
                                 <Text key={index} style={{fontSize: 20}}>{contact.firstName}</Text>
                             <Divider style={{borderWidth:0.5}}/>
                             </TouchableOpacity>

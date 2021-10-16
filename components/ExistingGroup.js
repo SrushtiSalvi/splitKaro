@@ -39,11 +39,11 @@ function ExistingGroup({set}) {
         }
          let groupList = []
          groupList = await AsyncStorage.getItem('groupList')
-         groupList.push(group)
-        // console.log("GroupList:",groupList)
+         groupList = JSON.parse(groupList)
+         groupList.push([group])
+         console.log("GroupList:",groupList,"  ",group)
          await AsyncStorage.setItem('groupList', JSON.stringify(groupList));
-        // console.log("abcr")
-        setter()
+         setter()
     }
    
     return (

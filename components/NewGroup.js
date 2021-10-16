@@ -15,7 +15,6 @@ function NewGroup() {
         const groupList = await AsyncStorage.getItem('groupList')
         const a = await JSON.parse(groupList)
         setGroups(a)
-        console.log("a",a)
     }
 
 
@@ -39,12 +38,12 @@ function NewGroup() {
             ) : <Text>No Groups Added</Text>} */}
             {groups.length > 0 ? 
             groups.map((group, index) => 
-            <View style={{}}>
+            <View key={index}>
                 <Divider />
                 <Text style={{fontSize: 18}}>{group.groupName}</Text>
                 <View style={{marginTop: "4%"}}>
-                {group.members.map((member) => 
-                        <Text>{member}</Text>
+                {group.members.map((member,index) => 
+                        <Text key={index}>{member}</Text>
                 )}
                 </View>
                 <Divider />
